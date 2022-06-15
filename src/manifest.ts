@@ -53,11 +53,11 @@ export const MANIFEST: Manifest = {
             time: "6:30pm",
             logo: PHASMO_LOGO,
         },
-        {
-            title: "Fortnite",
-            date: "06/16",
-            time: "6:30pm",
-            logo: FORTNITE_LOGO,
-        },
+        // {
+        //     title: "Fortnite",
+        //     date: "06/16",
+        //     time: "6:30pm",
+        //     logo: FORTNITE_LOGO,
+        // },
     ],
 };
