@@ -41,6 +41,10 @@ const EntryNameDiv = styled.div`
     align-content: center;
 `;
 
+const EntryDescriptionDiv = styled.div`
+    font-size: 48px;
+`;
+
 const LogoImg = styled.img``;
 
 export function MatchedScheduleEntry(props: MatchedScheduleEntryProps) {
@@ -60,7 +64,7 @@ export function MatchedScheduleEntry(props: MatchedScheduleEntryProps) {
                 {entry.logo ? (
                     <LogoImg style={entry.logo.css} title={entry.title} src={entry.logo.url} />
                 ) : (
-                    entry.title
+                    <EntryDescriptionDiv>{entry.title}</EntryDescriptionDiv>
                 )}
             </EntryNameDiv>
         </RootDiv>

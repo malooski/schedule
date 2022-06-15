@@ -45,8 +45,8 @@ const InnerDiv = styled.div`
 
 const LogoImg = styled.img`
     position: absolute;
-    top: -54px;
-    left: -16px;
+    top: 36px;
+    left: 16px;
 
     width: 900px;
 `;

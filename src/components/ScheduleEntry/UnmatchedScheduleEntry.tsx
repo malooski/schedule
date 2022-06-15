@@ -1,20 +1,9 @@
 import { format } from "date-fns";
 import styled from "styled-components";
 import { ScheduleEntryProps } from ".";
-import { DAY_OF_WEEK_WIDTH, ScheduleEntryRootDiv, SCHEDULE_ENTRY_HEIGHT } from "./constants";
+import { DAY_OF_WEEK_WIDTH, ScheduleEntryRootDiv } from "./constants";
 
 const RootDiv = styled(ScheduleEntryRootDiv)`
-    border-radius: 1000px;
-
-    height: ${SCHEDULE_ENTRY_HEIGHT};
-
-    font-size: 36px;
-
-    background-color: #3b3846;
-    border: 1px solid #95919e;
-
-    color: #95919e;
-
     display: grid;
     grid-template:
         "dayOfWeek entryTitle" 1fr /
