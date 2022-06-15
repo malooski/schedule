@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { addWeeks, eachDayOfInterval, endOfWeek, subDays, startOfWeek, format } from "date-fns";
+import { addWeeks, eachDayOfInterval, format, startOfWeek, subDays } from "date-fns";
+import styled from "styled-components";
 
 import logoUrl from "./assets/Logo.png";
 import { ScheduleEntry } from "./components/ScheduleEntry";
