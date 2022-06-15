@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { addWeeks, eachDayOfInterval, endOfWeek, subDays, startOfWeek, format } from "date-fns";
 
-import logoVideoUrl from "./assets/logo.webm";
+import logoUrl from "./assets/Logo.png";
 import { ScheduleEntry } from "./components/ScheduleEntry";
 
 import malooUrl from "./assets/malooski comm C.png";
@@ -43,7 +43,7 @@ const InnerDiv = styled.div`
     background-size: cover;
 `;
 
-const LogoVideo = styled.video`
+const LogoImg = styled.img`
     position: absolute;
     top: -54px;
     left: -16px;
@@ -99,7 +99,7 @@ function App() {
             <InnerDiv>
                 <MalooImg src={malooUrl}></MalooImg>
 
-                <LogoVideo muted autoPlay loop src={logoVideoUrl} />
+                <LogoImg src={logoUrl} />
 
                 <WeekHeader>
                     Week Of {format(weekStart, "M/d")} - {format(weekEnd, "M/d")}

@@ -41,26 +41,7 @@ const EntryNameDiv = styled.div`
     align-content: center;
 `;
 
-const BackgroundVideo = styled.video`
-    position: absolute;
-    top: -200px;
-    left: 0;
-    z-index: -1;
-
-    filter: blur(4px);
-
-    width: 100%;
-`;
-
-const BackgroundImage = styled.img`
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-
-    width: 100%;
-    height: 200px;
-`;
+const LogoImg = styled.img``;
 
 export function MatchedScheduleEntry(props: MatchedScheduleEntryProps) {
     const { entry, date } = props;
@@ -72,17 +53,12 @@ export function MatchedScheduleEntry(props: MatchedScheduleEntryProps) {
 
     return (
         <RootDiv>
-            {entry.background?.type === "video" && (
-                <BackgroundVideo autoPlay loop muted src={entry.background?.url} />
-            )}
-            {entry.background?.type === "image" && <BackgroundImage src={entry.background?.url} />}
-
             <DayOfWeekDiv>{format(date, "EEEE")}</DayOfWeekDiv>
             <EntryTimeDiv>{format(thisDate, "h:mmaaa")}</EntryTimeDiv>
 
             <EntryNameDiv>
                 {entry.logo ? (
-                    <img style={entry.logo.css} title={entry.title} src={entry.logo.url} />
+                    <LogoImg style={entry.logo.css} title={entry.title} src={entry.logo.url} />
                 ) : (
                     entry.title
                 )}
