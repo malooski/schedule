@@ -1,6 +1,5 @@
 import { CSSProperties } from "react";
 
-import fortniteLogoUrl from "./assets/logos/Fortnite Logo.png";
 import phasmoLogoUrl from "./assets/logos/Phasmo Logo.png";
 
 interface LogoMetadata {
@@ -13,13 +12,6 @@ const PHASMO_LOGO: LogoMetadata = {
     url: phasmoLogoUrl,
     css: {
         width: "450px",
-    },
-};
-
-const FORTNITE_LOGO: LogoMetadata = {
-    url: fortniteLogoUrl,
-    css: {
-        width: "300px",
     },
 };
 
@@ -53,11 +45,5 @@ export const MANIFEST: Manifest = {
             time: "6:30pm",
             logo: PHASMO_LOGO,
         },
-        // {
-        //     title: "Fortnite",
-        //     date: "06/16",
-        //     time: "6:30pm",
-        //     logo: FORTNITE_LOGO,
-        // },
     ],
 };
