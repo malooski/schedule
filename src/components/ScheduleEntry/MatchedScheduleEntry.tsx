@@ -2,6 +2,7 @@ import { format, parse } from "date-fns";
 import { zonedTimeToUtc } from "date-fns-tz";
 import styled from "styled-components";
 import { ScheduleEntryProps } from ".";
+import { THEME } from "../../constants";
 import { MANIFEST, ManifestScheduleEntry } from "../../manifest";
 import { DAY_OF_WEEK_WIDTH, ScheduleEntryRootDiv } from "./constants";
 
@@ -47,6 +48,28 @@ const EntryDescriptionDiv = styled.div`
 
 const LogoImg = styled.img``;
 
+const CollabersDiv = styled.div`
+    position: absolute;
+
+    font-size: 16px;
+    bottom: 4px;
+    left: 300px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+
+    a {
+        color: ${THEME.colors.lightGrey};
+    }
+`;
+
+const CollabersListDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+`;
+
 export function MatchedScheduleEntry(props: MatchedScheduleEntryProps) {
     const { entry, date } = props;
 
@@ -67,6 +90,19 @@ export function MatchedScheduleEntry(props: MatchedScheduleEntryProps) {
                     <EntryDescriptionDiv>{entry.title}</EntryDescriptionDiv>
                 )}
             </EntryNameDiv>
+
+            {entry.collabers && (
+                <CollabersDiv>
+                    <span>Joined by:</span>
+                    <CollabersListDiv>
+                        {entry.collabers.map(c => (
+                            <a href={c.twitterUrl} target="_blank" rel="noopener noreferrer">
+                                {c.name}
+                            </a>
+                        ))}
+                    </CollabersListDiv>
+                </CollabersDiv>
+            )}
         </RootDiv>
     );
 }

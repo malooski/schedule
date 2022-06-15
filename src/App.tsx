@@ -97,7 +97,7 @@ function App() {
     return (
         <BorderDiv>
             <InnerDiv>
-                <MalooImg src={malooUrl}></MalooImg>
+                <MalooImg src={malooUrl} />
 
                 <LogoImg src={logoUrl} />
 

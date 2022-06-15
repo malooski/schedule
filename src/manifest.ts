@@ -2,6 +2,22 @@ import { CSSProperties } from "react";
 
 import phasmoLogoUrl from "./assets/logos/Phasmo Logo.png";
 
+interface User {
+    name: string;
+    twitterUrl: string;
+}
+
+const USERS = {
+    tinyKitBee: {
+        name: "TinyKitBee",
+        twitterUrl: "https://twitter.com/tinykitbee",
+    },
+    theEtHunter: {
+        name: "TheETHunter",
+        twitterUrl: "https://twitter.com/TheETHunter",
+    },
+};
+
 interface LogoMetadata {
     url: string;
 
@@ -24,6 +40,8 @@ export interface ManifestScheduleEntry {
     logo?: LogoMetadata;
 
     color?: string;
+
+    collabers?: User[];
 }
 
 interface Manifest {
@@ -44,6 +62,7 @@ export const MANIFEST: Manifest = {
             date: "06/15",
             time: "6:30pm",
             logo: PHASMO_LOGO,
+            collabers: [USERS.tinyKitBee, USERS.theEtHunter],
         },
     ],
 };
