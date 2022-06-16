@@ -4,15 +4,11 @@ import styled from "styled-components";
 import logoUrl from "./assets/Logo.png";
 import { ScheduleEntry } from "./components/ScheduleEntry";
 
-import malooUrl from "./assets/malooski comm C.png";
 import { THEME } from "./constants";
 
-const BorderDiv = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 1920px;
-    height: 1080px;
+const RootDiv = styled.div`
+    width: 100%;
+    height: 100%;
     background-image: linear-gradient(
         -45deg,
         #eda3ec,
@@ -27,37 +23,32 @@ const BorderDiv = styled.div`
 
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    align-content: stretch;
-
+    align-items: center;
     overflow-y: auto;
 `;
 
 const InnerDiv = styled.div`
-    border-radius: 16px;
-    margin: 16px;
+    border-radius: 1em;
+    margin: 1em;
 
-    align-self: stretch;
+    width: 900px;
+
     flex-grow: 1;
     background-image: radial-gradient(#515257, #3b3846);
     background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 2em 0;
 `;
 
 const LogoImg = styled.img`
-    position: absolute;
-    top: 36px;
-    left: 16px;
-
-    width: 900px;
+    width: 75%;
 `;
 
 const EntriesArea = styled.div`
-    position: absolute;
-    left: 900px;
-    top: 110px;
-
-    width: 950px;
-
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -68,20 +59,9 @@ const EntriesArea = styled.div`
 const WeekHeader = styled.div`
     font-family: "Star Fighters";
 
-    font-size: 36px;
+    font-size: 2em;
     font-weight: bold;
     color: ${THEME.colors.lightGrey};
-
-    position: absolute;
-    top: 32px;
-    left: 950px;
-`;
-
-const MalooImg = styled.img`
-    position: absolute;
-    width: 900px;
-    left: 0px;
-    bottom: 32px;
 `;
 
 function App() {
@@ -95,10 +75,8 @@ function App() {
     });
 
     return (
-        <BorderDiv>
+        <RootDiv>
             <InnerDiv>
-                <MalooImg src={malooUrl} />
-
                 <LogoImg src={logoUrl} />
 
                 <WeekHeader>
@@ -111,7 +89,7 @@ function App() {
                     ))}
                 </EntriesArea>
             </InnerDiv>
-        </BorderDiv>
+        </RootDiv>
     );
 }
 

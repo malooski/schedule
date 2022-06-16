@@ -16,3 +16,6 @@ export const THEME = {
         gold: "#d0b389",
     },
 };
+
+export const MALOOSKI_LOGO_URL =
+    "https://malooski-public.s3.us-east-2.amazonaws.com/malooski-logo.webm";

@@ -43,17 +43,22 @@ const EntryNameDiv = styled.div`
 `;
 
 const EntryDescriptionDiv = styled.div`
-    font-size: 48px;
+    font-size: 1.5em;
+    color: ${THEME.colors.lightGrey};
 `;
 
-const LogoImg = styled.img``;
+const LogoImg = styled.img`
+    width: auto;
+    height: 2.5em;
+`;
 
 const CollabersDiv = styled.div`
     position: absolute;
+    bottom: 2em;
+    left: 15em;
 
-    font-size: 16px;
-    bottom: 4px;
-    left: 300px;
+    font-size: 0.5em;
+    bottom: 0.1em;
 
     display: flex;
     flex-direction: row;
@@ -67,7 +72,7 @@ const CollabersDiv = styled.div`
 const CollabersListDiv = styled.div`
     display: flex;
     flex-direction: row;
-    gap: 4px;
+    gap: 0.5em;
 `;
 
 export function MatchedScheduleEntry(props: MatchedScheduleEntryProps) {
@@ -85,7 +90,9 @@ export function MatchedScheduleEntry(props: MatchedScheduleEntryProps) {
 
             <EntryNameDiv>
                 {entry.logo ? (
-                    <LogoImg style={entry.logo.css} title={entry.title} src={entry.logo.url} />
+                    <div>
+                        <LogoImg style={entry.logo.css} title={entry.title} src={entry.logo.url} />
+                    </div>
                 ) : (
                     <EntryDescriptionDiv>{entry.title}</EntryDescriptionDiv>
                 )}

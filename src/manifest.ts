@@ -26,9 +26,6 @@ interface LogoMetadata {
 
 const PHASMO_LOGO: LogoMetadata = {
     url: phasmoLogoUrl,
-    css: {
-        width: "450px",
-    },
 };
 
 export interface ManifestScheduleEntry {
@@ -63,6 +60,11 @@ export const MANIFEST: Manifest = {
             time: "6:30pm",
             logo: PHASMO_LOGO,
             collabers: [USERS.tinyKitBee, USERS.theEtHunter],
+        },
+        {
+            title: "Neon White",
+            date: "06/16",
+            time: "6:30pm",
         },
     ],
 };
