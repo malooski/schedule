@@ -17,3 +17,6 @@ export const ScheduleEntryRootDiv = styled.div`
     color: #95919e;
     padding: 0 1.5em;
 `;
+
+export const MALOOSKI_LOGO_WEBM_URL =
+    "https://malooski-public.s3.us-east-2.amazonaws.com/Logo.webm";

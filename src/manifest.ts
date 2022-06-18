@@ -1,6 +1,8 @@
 import { CSSProperties } from "react";
 
 import phasmoLogoUrl from "./assets/logos/Phasmo Logo.png";
+import neonWhiteBgUrl from "./assets/backgrounds/Neon White Hero.jpg";
+import neonWhiteLogoUrl from "./assets/logos/Neon White Logo.png";
 
 interface User {
     name: string;
@@ -36,7 +38,11 @@ export interface ManifestScheduleEntry {
 
     logo?: LogoMetadata;
 
-    color?: string;
+    textColor?: string;
+    borderColor?: string;
+
+    bgColor?: string;
+    bgImage?: string;
 
     collabers?: User[];
 }
@@ -65,6 +71,18 @@ export const MANIFEST: Manifest = {
             title: "Neon White",
             date: "06/16",
             time: "6:30pm",
+            textColor: "white",
+            borderColor: "white",
+            bgColor: "#ffffff",
+            bgImage: `url("${neonWhiteBgUrl}")`,
+
+            logo: {
+                url: neonWhiteLogoUrl,
+                css: {
+                    height: "4em",
+                    margin: "",
+                },
+            },
         },
     ],
 };

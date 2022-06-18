@@ -1,8 +1,8 @@
 import { addWeeks, eachDayOfInterval, format, startOfWeek, subDays } from "date-fns";
 import styled from "styled-components";
 
-import logoUrl from "./assets/Logo.png";
 import { ScheduleEntry } from "./components/ScheduleEntry";
+import { MALOOSKI_LOGO_WEBM_URL } from "./components/ScheduleEntry/constants";
 
 import { THEME } from "./constants";
 
@@ -44,8 +44,9 @@ const InnerDiv = styled.div`
     padding: 2em 0;
 `;
 
-const LogoImg = styled.img`
-    width: 75%;
+const LogoVideo = styled.video`
+    width: 100%;
+    margin: -8em 0 -4em 0;
 `;
 
 const EntriesArea = styled.div`
@@ -77,7 +78,7 @@ function App() {
     return (
         <RootDiv>
             <InnerDiv>
-                <LogoImg src={logoUrl} />
+                <LogoVideo autoPlay muted loop src={MALOOSKI_LOGO_WEBM_URL} />
 
                 <WeekHeader>
                     Week Of {format(weekStart, "M/d")} - {format(weekEnd, "M/d")}

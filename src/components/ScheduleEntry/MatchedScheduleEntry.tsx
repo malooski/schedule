@@ -11,6 +11,9 @@ export interface MatchedScheduleEntryProps extends ScheduleEntryProps {
 }
 
 const RootDiv = styled(ScheduleEntryRootDiv)`
+    background-size: cover;
+    background-position: center;
+
     overflow: hidden;
     display: grid;
     position: relative;
@@ -25,6 +28,7 @@ const RootDiv = styled(ScheduleEntryRootDiv)`
 
 const DayOfWeekDiv = styled.div`
     grid-area: dayOfWeek;
+    font-weight: bold;
 
     align-self: flex-end;
 `;
@@ -84,7 +88,14 @@ export function MatchedScheduleEntry(props: MatchedScheduleEntryProps) {
     thisDate = zonedTimeToUtc(thisDate, MANIFEST.timezone);
 
     return (
-        <RootDiv>
+        <RootDiv
+            style={{
+                backgroundColor: entry.bgColor,
+                color: entry.textColor,
+                backgroundImage: entry.bgImage,
+                borderColor: entry.borderColor,
+            }}
+        >
             <DayOfWeekDiv>{format(date, "EEEE")}</DayOfWeekDiv>
             <EntryTimeDiv>{format(thisDate, "h:mmaaa")}</EntryTimeDiv>
 
@@ -94,7 +105,9 @@ export function MatchedScheduleEntry(props: MatchedScheduleEntryProps) {
                         <LogoImg style={entry.logo.css} title={entry.title} src={entry.logo.url} />
                     </div>
                 ) : (
-                    <EntryDescriptionDiv>{entry.title}</EntryDescriptionDiv>
+                    <EntryDescriptionDiv style={{ color: entry.textColor }}>
+                        {entry.title}
+                    </EntryDescriptionDiv>
                 )}
             </EntryNameDiv>
 
