@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import styled from "styled-components";
 import { ScheduleEntryProps } from ".";
-import { useTextGlitch } from "../../util/use-text-glitch";
+import { useTextGlitch } from "../../util/react/use-text-glitch";
 import { DayOfWeekDiv, ScheduleEntryRootDiv } from "./common";
 import { CONTENT_HORIZONTAL_PADDING, DAY_OF_WEEK_WIDTH } from "./constants";
 

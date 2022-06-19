@@ -66,9 +66,7 @@ const WeekHeader = styled.div`
 `;
 
 function App() {
-    const now = new Date();
-    const weekStart = startOfWeek(now, { weekStartsOn: 1 });
-    const weekEnd = subDays(addWeeks(weekStart, 1), 1);
+    const [weekStart, weekEnd] = getDateRange();
 
     const days = eachDayOfInterval({
         start: weekStart,
@@ -95,3 +93,12 @@ function App() {
 }
 
 export default App;
+
+function getDateRange(): [Date, Date] {
+    const now = new Date();
+    const weekStart = startOfWeek(now);
+
+    const weekEnd = subDays(addWeeks(weekStart, 1), 1);
+
+    return [weekStart, weekEnd];
+}

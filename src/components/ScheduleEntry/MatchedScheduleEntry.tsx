@@ -3,12 +3,14 @@ import { zonedTimeToUtc } from "date-fns-tz";
 import styled from "styled-components";
 import { ScheduleEntryProps } from ".";
 import { THEME } from "../../constants";
-import { MANIFEST, ManifestScheduleEntry } from "../../manifest";
+import { MANIFEST } from "../../manifest";
+import { ManifestEntry } from "../../manifest/types";
+import useIntervalFlip from "../../util/react/use-interval-flip";
 import { DayOfWeekDiv, ScheduleEntryRootDiv } from "./common";
 import { CONTENT_HORIZONTAL_PADDING, DAY_OF_WEEK_WIDTH } from "./constants";
 
 export interface MatchedScheduleEntryProps extends ScheduleEntryProps {
-    entry: ManifestScheduleEntry;
+    entry: ManifestEntry;
 }
 
 const RootDiv = styled(ScheduleEntryRootDiv)`
@@ -26,7 +28,7 @@ const HeaderDiv = styled.div`
         ${DAY_OF_WEEK_WIDTH} 1fr;
 
     font-size: 1.2em;
-    margin: 0.2em 1em;
+    margin: 0.2em 1em; ;
 `;
 
 const FooterDiv = styled.div`
@@ -37,6 +39,9 @@ const FooterDiv = styled.div`
 const BodyDiv = styled.div`
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+
+    min-height: 4em;
 
     display: flex;
     flex-direction: row;
@@ -72,6 +77,10 @@ const LogoImg = styled.img`
     padding: 0.5em;
 `;
 
+const BackgroundVideo = styled.video`
+    max-width: 100%;
+`;
+
 const CollabersDiv = styled.div`
     display: flex;
     flex-direction: row;
@@ -91,30 +100,43 @@ const CollabersListDiv = styled.div`
 export function MatchedScheduleEntry(props: MatchedScheduleEntryProps) {
     const { entry, date } = props;
 
+    const { theme } = entry;
+
     let thisDate = new Date();
     thisDate = parse(entry.date, "MM/dd", thisDate);
     thisDate = parse(entry.time, "h:mmaaa", thisDate);
     thisDate = zonedTimeToUtc(thisDate, MANIFEST.timezone);
 
+    const timeText = useIntervalFlip(
+        () => format(thisDate, "h:mmaaa"),
+        () => format(thisDate, "h mmaaa"),
+        1000,
+        [thisDate]
+    );
+
     return (
         <RootDiv>
             <HeaderDiv>
                 <DayOfWeekDiv>{format(date, "EEEE")}</DayOfWeekDiv>
-                <EntryTimeDiv>{format(thisDate, "h:mmaaa")}</EntryTimeDiv>
+                <EntryTimeDiv>{timeText}</EntryTimeDiv>
             </HeaderDiv>
-            <BodyDiv style={{ backgroundImage: entry.bgImage }}>
+            <BodyDiv style={{ backgroundImage: theme?.bgImage }}>
+                {theme?.bgVideo && (
+                    <BackgroundVideo autoPlay loop muted playsInline src={theme?.bgVideo} />
+                )}
                 <EntryNameDiv>
-                    {entry.logo ? (
+                    {theme?.logo && (
                         <div>
                             <LogoImg
-                                style={entry.logo.css}
+                                style={theme?.logo.css}
                                 title={entry.title}
-                                src={entry.logo.url}
+                                src={theme?.logo.url}
                             />
                         </div>
-                    ) : (
-                        <EntryDescriptionDiv style={{ color: entry.textColor }}>
-                            {entry.title}
+                    )}
+                    {entry.text && (
+                        <EntryDescriptionDiv style={{ color: theme?.textColor }}>
+                            {entry.text}
                         </EntryDescriptionDiv>
                     )}
                 </EntryNameDiv>
