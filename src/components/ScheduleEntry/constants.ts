@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 export const DAY_OF_WEEK_WIDTH = "6em";
 
 export const CONTENT_HORIZONTAL_PADDING = "1em";
