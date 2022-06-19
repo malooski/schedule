@@ -1,6 +1,8 @@
 import { CSSProperties } from "react";
 
-import phasmoLogoUrl from "./assets/logos/Phasmo Logo.png";
+import phasmoLogo from "./assets/logos/Phasmo Logo.png";
+import phasmoHero from "./assets/backgrounds/Phasmo Hero.jpg";
+
 import neonWhiteBgUrl from "./assets/backgrounds/Neon White Hero.jpg";
 import neonWhiteLogoUrl from "./assets/logos/Neon White Logo.png";
 
@@ -27,7 +29,7 @@ interface LogoMetadata {
 }
 
 const PHASMO_LOGO: LogoMetadata = {
-    url: phasmoLogoUrl,
+    url: phasmoLogo,
 };
 
 export interface ManifestScheduleEntry {
@@ -45,6 +47,7 @@ export interface ManifestScheduleEntry {
     bgImage?: string;
 
     collabers?: User[];
+    host?: User;
 }
 
 interface Manifest {
@@ -66,6 +69,7 @@ export const MANIFEST: Manifest = {
             time: "6:30pm",
             logo: PHASMO_LOGO,
             collabers: [USERS.tinyKitBee, USERS.theEtHunter],
+            bgImage: `url("${phasmoHero}")`,
         },
         {
             title: "Neon White",
@@ -78,10 +82,6 @@ export const MANIFEST: Manifest = {
 
             logo: {
                 url: neonWhiteLogoUrl,
-                css: {
-                    height: "4em",
-                    margin: "",
-                },
             },
         },
     ],

@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
-import starFightersFont from "./assets/Stars Fighters.ttf";
+import starFightersFont from "./assets/fonts/Stars Fighters.ttf";
+import digi7Font from "./assets/fonts/digital-7 (mono).ttf";
 
 export default createGlobalStyle`
 
@@ -18,5 +19,10 @@ export default createGlobalStyle`
     @font-face {
         font-family: "Star Fighters";
         src: url("${starFightersFont}");
+    }
+
+    @font-face {
+        font-family: "Digital 7";
+        src: url("${digi7Font}");
     }
 `;
