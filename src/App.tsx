@@ -1,10 +1,12 @@
-import { addWeeks, eachDayOfInterval, format, startOfWeek, subDays } from "date-fns";
+import { faTwitch, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { addDays, addWeeks, eachDayOfInterval, format, startOfWeek, subDays } from "date-fns";
 import styled from "styled-components";
 
 import { ScheduleEntry } from "./components/ScheduleEntry";
 import { MALOOSKI_LOGO_WEBM_URL } from "./components/ScheduleEntry/constants";
-
 import { THEME } from "./constants";
+import { getManifestEntryByDate } from "./manifest/lib";
 
 const RootDiv = styled.div`
     width: 100%;
@@ -27,9 +29,16 @@ const RootDiv = styled.div`
     overflow-y: auto;
 `;
 
+const ContainerDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 0.5em 0;
+`;
+
 const InnerDiv = styled.div`
     border-radius: 1em;
-    margin: 1em;
 
     width: 900px;
 
@@ -44,9 +53,26 @@ const InnerDiv = styled.div`
     padding: 2em 0;
 `;
 
+const Header = styled.div`
+    display: flex;
+    flex-direction: row;
+
+    gap: 2em;
+
+    margin: 0.5em 0em;
+`;
+
+const HeaderLink = styled.a`
+    color: ${THEME.colors.lightGrey};
+`;
+
 const LogoVideo = styled.video`
     width: 100%;
     margin: -8em 0 -4em 0;
+
+    // click through
+    user-select: none;
+    pointer-events: none;
 `;
 
 const EntriesArea = styled.div`
@@ -66,7 +92,7 @@ const WeekHeader = styled.div`
 `;
 
 function App() {
-    const [weekStart, weekEnd] = getDateRange();
+    const [weekStart, weekEnd] = getScheduleDateRange();
 
     const days = eachDayOfInterval({
         start: weekStart,
@@ -75,30 +101,56 @@ function App() {
 
     return (
         <RootDiv>
-            <InnerDiv>
-                <LogoVideo autoPlay muted loop src={MALOOSKI_LOGO_WEBM_URL} />
+            <ContainerDiv>
+                <Header>
+                    <HeaderLink href="https://maloo.ski" target="_blank" rel="norefferer">
+                        Home
+                    </HeaderLink>
+                    <HeaderLink href="https://twitch.tv/malooski" target="_blank" rel="norefferer">
+                        <FontAwesomeIcon icon={faTwitch} /> Twitch
+                    </HeaderLink>
+                    <HeaderLink
+                        href="https://twitter.com/malooski_vt"
+                        target="_blank"
+                        rel="norefferer"
+                    >
+                        <FontAwesomeIcon icon={faTwitter} /> Twitter
+                    </HeaderLink>
+                </Header>
+                <InnerDiv>
+                    <LogoVideo autoPlay muted loop src={MALOOSKI_LOGO_WEBM_URL} />
 
-                <WeekHeader>
-                    Week Of {format(weekStart, "M/d")} - {format(weekEnd, "M/d")}
-                </WeekHeader>
+                    <WeekHeader>
+                        Week Of {format(weekStart, "M/d")} - {format(weekEnd, "M/d")}
+                    </WeekHeader>
 
-                <EntriesArea>
-                    {days.map(day => (
-                        <ScheduleEntry date={day} />
-                    ))}
-                </EntriesArea>
-            </InnerDiv>
+                    <EntriesArea>
+                        {days.map(day => (
+                            <ScheduleEntry date={day} />
+                        ))}
+                    </EntriesArea>
+                </InnerDiv>
+            </ContainerDiv>
         </RootDiv>
     );
 }
 
 export default App;
 
-function getDateRange(): [Date, Date] {
+function getScheduleDateRange(): [Date, Date] {
     const now = new Date();
-    const weekStart = startOfWeek(now);
+    let weekStart = startOfWeek(now, { weekStartsOn: 1 });
+    const thisSunday = addDays(weekStart, 6);
 
-    const weekEnd = subDays(addWeeks(weekStart, 1), 1);
+    const nextWeekStart = addWeeks(weekStart, 1);
 
-    return [weekStart, weekEnd];
+    // Skip to next week if its close to next week and no Sunday stream
+    const entry = getManifestEntryByDate(thisSunday);
+    if (nextWeekStart < addDays(now, 1) && !entry) {
+        weekStart = nextWeekStart;
+    }
+
+    const lastDayInWeek = subDays(addWeeks(weekStart, 1), 1);
+
+    return [weekStart, lastDayInWeek];
 }

@@ -1,5 +1,6 @@
-import { isSameDay, parse } from "date-fns";
-import { MANIFEST } from "../../manifest";
+import { useMemo } from "react";
+
+import { getManifestEntryByDate } from "../../manifest/lib";
 import { MatchedScheduleEntry } from "./MatchedScheduleEntry";
 import { UnmatchedScheduleEntry } from "./UnmatchedScheduleEntry";
 
@@ -10,12 +11,7 @@ export interface ScheduleEntryProps {
 export function ScheduleEntry(props: ScheduleEntryProps) {
     const { date } = props;
 
-    const matchedEntry = MANIFEST.entries.find(entry => {
-        let thisDate = new Date();
-        thisDate = parse(entry.date, "MM/dd", thisDate);
-
-        return isSameDay(thisDate, date);
-    });
+    const matchedEntry = useMemo(() => getManifestEntryByDate(date), [date]);
 
     if (matchedEntry) {
         return <MatchedScheduleEntry entry={matchedEntry} date={date} />;

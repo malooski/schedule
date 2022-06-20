@@ -2,7 +2,8 @@ import { CSSProperties } from "react";
 
 export interface ManifestUser {
     name: string;
-    twitterUrl: string;
+    twitterUrl?: string;
+    twitchUrl?: string;
 }
 
 export interface ManifestLogo {

@@ -13,7 +13,7 @@ export const CODING_VIDEO_URL =
     "https://malooski-public.s3.us-east-2.amazonaws.com/Coding+Background.mp4";
 
 export const PHASMO_THEME: ManifestEntryTheme = {
-    bgImage: `url(${phasmoHero})`,
+    bgImage: `url("${phasmoHero}")`,
     logo: {
         url: phasmoLogo,
     },
