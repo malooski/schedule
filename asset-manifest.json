@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "https://sched.maloo.ski/static/js/main.964f968c.js",
+    "static/js/787.0e32bcaf.chunk.js": "https://sched.maloo.ski/static/js/787.0e32bcaf.chunk.js",
+    "static/media/Neon White Hero.jpg": "https://sched.maloo.ski/static/media/Neon White Hero.5c0ffcf130abed25d3ce.jpg",
+    "static/media/Neon White Logo.png": "https://sched.maloo.ski/static/media/Neon White Logo.3e1ed50a91114964e4b1.png",
+    "static/media/Phasmo Hero.jpg": "https://sched.maloo.ski/static/media/Phasmo Hero.d2c38e5f371656c45784.jpg",
+    "static/media/Hylics.jpg": "https://sched.maloo.ski/static/media/Hylics.d730427609bd72ed9cc2.jpg",
+    "static/media/Hylics.png": "https://sched.maloo.ski/static/media/Hylics.07a1a6cf5b9844eb4fe3.png",
+    "static/media/digital-7 (mono).ttf": "https://sched.maloo.ski/static/media/digital-7 (mono).ae951a188b593952b384.ttf",
+    "static/media/Stars Fighters.ttf": "https://sched.maloo.ski/static/media/Stars Fighters.8413550d17139b628d7e.ttf",
+    "index.html": "https://sched.maloo.ski/index.html",
+    "main.964f968c.js.map": "https://sched.maloo.ski/static/js/main.964f968c.js.map",
+    "787.0e32bcaf.chunk.js.map": "https://sched.maloo.ski/static/js/787.0e32bcaf.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.964f968c.js"
+  ]
+}
