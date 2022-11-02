@@ -1,41 +1,22 @@
-import { isSameDay, parse } from "date-fns";
-import { HYLICS_THEME, NEON_WHITE_THEME, PHASMO_THEME } from "./themes";
-import { Manifest, ManifestEntry } from "./types";
-import { ONYX_PASTELS } from "./users";
+import { createManifest } from "./lib";
 
-export const MANIFEST: Manifest = {
+export const MANIFEST = createManifest({
     timezone: "America/Chicago",
     entries: [
         {
-            title: "Neon White",
-            date: "06/21",
-            time: "6:30pm",
-
-            theme: NEON_WHITE_THEME,
-        },
-        {
             title: "Hylics",
-            date: "06/22",
+            date: "11/02",
             time: "6:30pm",
-
-            theme: HYLICS_THEME,
         },
         {
-            title: "Phasmophobia",
-            date: "06/23",
+            title: "Art",
+            date: "11/03",
             time: "6:30pm",
-            theme: PHASMO_THEME,
-
-            collabers: [ONYX_PASTELS],
+        },
+        {
+            title: "Hylics II",
+            date: "11/05",
+            time: "10:00am",
         },
     ],
-};
-
-export function getManifestEntryByDate(date: Date): ManifestEntry | undefined {
-    return MANIFEST.entries.find(entry => {
-        let thisDate = new Date();
-        thisDate = parse(entry.date, "MM/dd", thisDate);
-
-        return isSameDay(thisDate, date);
-    });
-}
+});

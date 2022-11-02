@@ -1,137 +1,137 @@
-import { faTwitch, faTwitter } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { addDays, addWeeks, eachDayOfInterval, format, startOfWeek, subDays } from "date-fns";
-import styled from "styled-components";
 
-import { ScheduleEntry } from "./components/ScheduleEntry";
-import { MALOOSKI_LOGO_WEBM_URL } from "./components/ScheduleEntry/constants";
-import { THEME } from "./constants";
 import { getManifestEntryByDate } from "./manifest/lib";
 
+import { Fragment } from "react";
+import styled from "styled-components";
+import backgroundUrl from "./assets/Background.jpg";
+import { ManifestEntry } from "./manifest/types";
+
 const RootDiv = styled.div`
+    position: relative;
+    overflow: hidden;
+`;
+
+const BackgroundImg = styled.img`
     width: 100%;
-    height: 100%;
-    background-image: linear-gradient(
-        -45deg,
-        #eda3ec,
-        #c765c8,
-        #855cd2,
-        #613fb6,
-        #c765c8,
-        #eda3ec,
-        #f2b5cf
-    );
-    background-size: cover;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
 `;
 
-const ContainerDiv = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+const WeekOfText = styled.div`
+    position: absolute;
+    right: 1vw;
+    top: 1vw;
+    width: 41vw;
 
-    padding: 0.5em 0;
-`;
+    text-align: center;
 
-const InnerDiv = styled.div`
-    border-radius: 1em;
-
-    width: 900px;
-
-    flex-grow: 1;
-    background-image: radial-gradient(#515257, #3b3846);
-    background-size: cover;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    padding: 2em 0;
-`;
-
-const Header = styled.div`
-    display: flex;
-    flex-direction: row;
-
-    gap: 2em;
-
-    margin: 0.5em 0em;
-`;
-
-const HeaderLink = styled.a`
-    color: ${THEME.colors.lightGrey};
-`;
-
-const LogoVideo = styled.video`
-    width: 100%;
-    margin: -8em 0 -4em 0;
-
-    // click through
-    user-select: none;
-    pointer-events: none;
-`;
-
-const EntriesArea = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-
-    gap: 8px;
-`;
-
-const WeekHeader = styled.div`
+    font-size: 2vw;
     font-family: "Star Fighters";
+`;
 
-    font-size: 2em;
-    font-weight: bold;
-    color: ${THEME.colors.lightGrey};
+const EntriesDiv = styled.div`
+    position: absolute;
+
+    display: grid;
+    top: 12vw;
+    right: 1vw;
+    width: 41vw;
+    gap: 0 1vw;
+
+    font-size: 2vw;
+
+    grid-template:
+        ". . ." 5vw
+        ". . ." 5vw
+        ". . ." 5vw
+        ". . ." 5vw
+        ". . ." 5vw
+        ". . ." 5vw / auto 1fr auto;
 `;
 
 function App() {
     const [weekStart, weekEnd] = getScheduleDateRange();
+
+    const weekFrom = format(weekStart, "M/dd");
+    const weekTo = format(weekEnd, "M/dd");
 
     const days = eachDayOfInterval({
         start: weekStart,
         end: weekEnd,
     });
 
+    const monEntry = getManifestEntryByDate(days[0]);
+    const tuesEntry = getManifestEntryByDate(days[1]);
+    const wedEntry = getManifestEntryByDate(days[2]);
+    const thursEntry = getManifestEntryByDate(days[3]);
+    const friEntry = getManifestEntryByDate(days[4]);
+    const satEntry = getManifestEntryByDate(days[5]);
+    const sunEntry = getManifestEntryByDate(days[6]);
+
+    const weekendDay = satEntry != null ? "Saturday" : sunEntry != null ? "Sunday" : "Weekend";
+    const weekendEntry = satEntry ?? sunEntry;
+
     return (
         <RootDiv>
-            <ContainerDiv>
-                <Header>
-                    <HeaderLink href="https://maloo.ski" target="_blank" rel="norefferer">
-                        Home
-                    </HeaderLink>
-                    <HeaderLink href="https://twitch.tv/malooski" target="_blank" rel="norefferer">
-                        <FontAwesomeIcon icon={faTwitch} /> Twitch
-                    </HeaderLink>
-                    <HeaderLink
-                        href="https://twitter.com/malooski_vt"
-                        target="_blank"
-                        rel="norefferer"
-                    >
-                        <FontAwesomeIcon icon={faTwitter} /> Twitter
-                    </HeaderLink>
-                </Header>
-                <InnerDiv>
-                    <LogoVideo autoPlay muted loop src={MALOOSKI_LOGO_WEBM_URL} />
+            <BackgroundImg src={backgroundUrl}></BackgroundImg>
 
-                    <WeekHeader>
-                        Week Of {format(weekStart, "M/d")} - {format(weekEnd, "M/d")}
-                    </WeekHeader>
+            <WeekOfText>
+                Week of
+                <br />
+                {weekFrom} - {weekTo}
+            </WeekOfText>
 
-                    <EntriesArea>
-                        {days.map(day => (
-                            <ScheduleEntry date={day} />
-                        ))}
-                    </EntriesArea>
-                </InnerDiv>
-            </ContainerDiv>
+            <EntriesDiv>
+                <EntryRow day="Monday" entry={monEntry} />
+                <EntryRow day="Tuesday" entry={tuesEntry} />
+                <EntryRow day="Wednesday" entry={wedEntry} />
+                <EntryRow day="Thursday" entry={thursEntry} />
+                <EntryRow day="Friday" entry={friEntry} />
+
+                <EntryRow day={weekendDay} entry={weekendEntry} />
+            </EntriesDiv>
         </RootDiv>
+    );
+}
+
+const DayDiv = styled.div``;
+
+const EmptyDayDiv = styled(DayDiv)`
+    color: rgba(0, 0, 0, 0.5);
+`;
+
+const NameDiv = styled.div`
+    justify-self: center;
+    font-weight: bold;
+`;
+
+const TimeDiv = styled.div`
+    font-family: "Digital 7";
+    font-size: 1.2em;
+    justify-self: end;
+`;
+
+function EntryRow(props: { day: string; entry: ManifestEntry | undefined }) {
+    const { day, entry } = props;
+
+    if (!entry) {
+        return (
+            <Fragment>
+                <EmptyDayDiv>{day}</EmptyDayDiv>
+                <NameDiv></NameDiv>
+                <TimeDiv></TimeDiv>
+            </Fragment>
+        );
+    }
+    const dateText = format(entry.date, "h:mm aa");
+
+    return (
+        <Fragment>
+            <DayDiv>{day}</DayDiv>
+
+            <NameDiv>{entry.title}</NameDiv>
+
+            <TimeDiv>{dateText}</TimeDiv>
+        </Fragment>
     );
 }
 
