@@ -21,7 +21,7 @@ jobs:
             - name: Build
               run: yarn build
               env:
-                  PUBLIC_URL: https://sched.maloo.ski/
+                  PUBLIC_URL: https://when.maloo.ski/
 
             - name: Prevent Jekyll
               run: touch build/.nojekyll
