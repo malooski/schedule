@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.js": "https://when.maloo.ski/static/js/main.8a2fb471.js",
+    "static/js/787.0e32bcaf.chunk.js": "https://when.maloo.ski/static/js/787.0e32bcaf.chunk.js",
+    "static/media/Background.jpg": "https://when.maloo.ski/static/media/Background.52a39f67b27cf8a7b8cf.jpg",
+    "static/media/digital-7 (mono).ttf": "https://when.maloo.ski/static/media/digital-7 (mono).ae951a188b593952b384.ttf",
+    "static/media/Stars Fighters.ttf": "https://when.maloo.ski/static/media/Stars Fighters.8413550d17139b628d7e.ttf",
+    "index.html": "https://when.maloo.ski/index.html",
+    "main.8a2fb471.js.map": "https://when.maloo.ski/static/js/main.8a2fb471.js.map",
+    "787.0e32bcaf.chunk.js.map": "https://when.maloo.ski/static/js/787.0e32bcaf.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.8a2fb471.js"
+  ]
+}
