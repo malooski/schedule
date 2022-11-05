@@ -8,12 +8,19 @@ import backgroundUrl from "./assets/Background.jpg";
 import { ManifestEntry } from "./manifest/types";
 
 const RootDiv = styled.div`
+    width: 100%;
+    height: 100%;
+`;
+
+const ContainerDiv = styled.div`
     position: relative;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
 `;
 
 const BackgroundImg = styled.img`
     width: 100%;
+    height: auto;
 `;
 
 const WeekOfText = styled.div`
@@ -26,6 +33,9 @@ const WeekOfText = styled.div`
 
     font-size: 2vw;
     font-family: "Star Fighters";
+
+    color: #7f818e;
+    text-shadow: black 0.05em 0.05em 0.1em;
 `;
 
 const EntriesDiv = styled.div`
@@ -72,28 +82,32 @@ function App() {
 
     return (
         <RootDiv>
-            <BackgroundImg src={backgroundUrl}></BackgroundImg>
+            <ContainerDiv>
+                <BackgroundImg src={backgroundUrl}></BackgroundImg>
 
-            <WeekOfText>
-                Week of
-                <br />
-                {weekFrom} - {weekTo}
-            </WeekOfText>
+                <WeekOfText>
+                    Week of
+                    <br />
+                    {weekFrom} - {weekTo}
+                </WeekOfText>
 
-            <EntriesDiv>
-                <EntryRow day="Monday" entry={monEntry} />
-                <EntryRow day="Tuesday" entry={tuesEntry} />
-                <EntryRow day="Wednesday" entry={wedEntry} />
-                <EntryRow day="Thursday" entry={thursEntry} />
-                <EntryRow day="Friday" entry={friEntry} />
+                <EntriesDiv>
+                    <EntryRow day="Monday" entry={monEntry} />
+                    <EntryRow day="Tuesday" entry={tuesEntry} />
+                    <EntryRow day="Wednesday" entry={wedEntry} />
+                    <EntryRow day="Thursday" entry={thursEntry} />
+                    <EntryRow day="Friday" entry={friEntry} />
 
-                <EntryRow day={weekendDay} entry={weekendEntry} />
-            </EntriesDiv>
+                    <EntryRow day={weekendDay} entry={weekendEntry} />
+                </EntriesDiv>
+            </ContainerDiv>
         </RootDiv>
     );
 }
 
-const DayDiv = styled.div``;
+const DayDiv = styled.div`
+    font-family: "Exo 2";
+`;
 
 const EmptyDayDiv = styled(DayDiv)`
     color: rgba(0, 0, 0, 0.5);
@@ -102,12 +116,22 @@ const EmptyDayDiv = styled(DayDiv)`
 const NameDiv = styled.div`
     justify-self: center;
     font-weight: bold;
+    font-family: "Exo 2";
 `;
 
 const TimeDiv = styled.div`
-    font-family: "Digital 7";
-    font-size: 1.2em;
     justify-self: end;
+    margin-top: -0.2em;
+`;
+
+const TimeText = styled.span`
+    font-family: "Digital 7";
+    font-size: 0.9em;
+    background-image: linear-gradient(#5a5a5a, #141414, #5a5a5a);
+    color: #b16be9;
+    padding: 0.1em 0.2em;
+    border-radius: 0.3em;
+    border: 0.1em solid #181818;
 `;
 
 function EntryRow(props: { day: string; entry: ManifestEntry | undefined }) {
@@ -130,7 +154,9 @@ function EntryRow(props: { day: string; entry: ManifestEntry | undefined }) {
 
             <NameDiv>{entry.title}</NameDiv>
 
-            <TimeDiv>{dateText}</TimeDiv>
+            <TimeDiv>
+                <TimeText>{dateText}</TimeText>
+            </TimeDiv>
         </Fragment>
     );
 }
