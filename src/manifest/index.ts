@@ -1,6 +1,6 @@
 import { Manifest, ManifestEntry } from "./types";
 
-import alanWakeImg from "../assets/alanwake2.jpg";
+import alanWakeImg from "../assets/alanwake2.webp";
 
 // YYYY-MM-DDTHH:mm:ss.sssZ
 export const MANIFEST = new Manifest({
