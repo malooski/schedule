@@ -1,22 +1,11 @@
-import { createManifest } from "./lib";
+import { Manifest, ManifestEntry } from "./types";
 
-export const MANIFEST = createManifest({
-    timezone: "America/Chicago",
+// YYYY-MM-DDTHH:mm:ss.sssZ
+export const MANIFEST = new Manifest({
     entries: [
-        {
-            title: "Hylics",
-            date: "11/02",
-            time: "6:30pm",
-        },
-        {
-            title: "Art",
-            date: "11/03",
-            time: "6:30pm",
-        },
-        {
-            title: "Hylics II",
-            date: "11/05",
-            time: "10:00am",
-        },
+        new ManifestEntry({
+            title: "Alan Wake 2",
+            date: "5 November 2023 18:00 CST",
+        }),
     ],
 });

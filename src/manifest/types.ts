@@ -1,20 +1,26 @@
-export interface UserManifestEntry {
+export interface ManifestEntryArgs {
     title: string;
-
-    time: string; // HH:MM
-    date: string; // MM/DD
+    date: Date | number | string;
 }
 
-export interface UserManifest {
-    timezone: string;
-    entries: UserManifestEntry[];
-}
-
-export interface ManifestEntry {
+export class ManifestEntry {
     title: string;
     date: Date;
+
+    constructor(args: ManifestEntryArgs) {
+        this.title = args.title;
+        this.date = new Date(args.date);
+    }
 }
 
-export interface Manifest {
+export interface ManifestArgs {
     entries: ManifestEntry[];
+}
+
+export class Manifest {
+    entries: ManifestEntry[];
+
+    constructor(args: ManifestArgs) {
+        this.entries = args.entries;
+    }
 }
