@@ -1,43 +1,86 @@
-import { addMonths, addWeeks, formatDistanceToNow, startOfDay } from "date-fns";
+import { addWeeks, format, startOfDay } from "date-fns";
 
-import { MANIFEST } from "./manifest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { MANIFEST } from "./manifest";
 
-import classes from "./App.module.scss";
-import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import { faTwitch } from "@fortawesome/free-brands-svg-icons";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+import classes from "./App.module.scss";
+import { ManifestEntry } from "./manifest/types";
+import { urlToCss } from "./util/dom";
+
+import logoImg from "./assets/Logo.webp";
 
 const TWITCH_URL = "https://twitch.tv/malooski";
 
 function App() {
     const todayStart = startOfDay(new Date());
 
-    const weekLater = addWeeks(todayStart, 1);
-    const monthLater = addMonths(todayStart, 1);
+    const viewEnd = addWeeks(todayStart, 2);
 
     const entries = MANIFEST.entries.filter(
-        entry => entry.date >= todayStart && entry.date < weekLater
+        entry => entry.date >= todayStart && entry.date < viewEnd
     );
 
     return (
         <div className={classes.root}>
-            <h1>Schedule</h1>
+            <img className={classes.logo} src={logoImg} alt="Malooski Logo" />
 
-            <a className={classes.twitchLink} href={TWITCH_URL} target="_blank" rel="noreferrer">
+            <a
+                title="Go to Malooski's Twitch"
+                className={classes.twitchLink}
+                href={TWITCH_URL}
+                target="_blank"
+                rel="noreferrer"
+            >
                 <FontAwesomeIcon icon={faTwitch} />
-                <span>Malooski</span>
+                <span>Twitch</span>
                 <FontAwesomeIcon icon={faExternalLinkAlt} />
             </a>
 
+            <h2>Schedule</h2>
+
             <div className={classes.scheduleList}>
                 {entries.map(entry => (
-                    <>
-                        <div className={classes.name}>{entry.title}</div>
-                        <div className={classes.time}>{formatDistanceToNow(entry.date)}</div>
-                    </>
+                    <ScheduleEntry key={entry.key} entry={entry} />
                 ))}
             </div>
         </div>
+    );
+}
+
+interface ScheduleEntryProps {
+    entry: ManifestEntry;
+}
+
+function ScheduleEntry(props: ScheduleEntryProps) {
+    const { entry } = props;
+
+    const bgImg = entry.bgImg != null ? urlToCss(entry.bgImg) : undefined;
+
+    const dayOfWeek = format(entry.date, "EEE");
+    const shortDate = format(entry.date, "MMM d");
+    const timeOfDayFirst = format(entry.date, "h");
+    const timeOfDaySecond = format(entry.date, "mm a");
+
+    return (
+        <>
+            <div className={classes.day}>
+                <div className={classes.shortDate}>{shortDate}</div>
+                <div className={classes.dayOfWeek}>{dayOfWeek}</div>
+            </div>
+
+            <div className={classes.scheduleEntryImage} style={{ backgroundImage: bgImg }}>
+                <span className={classes.entryTitle}>{entry.title}</span>
+            </div>
+            <div className={classes.time}>
+                <div>
+                    {timeOfDayFirst}
+                    <span className={classes.colon}>:</span>
+                    {timeOfDaySecond}
+                </div>
+            </div>
+        </>
     );
 }
 
